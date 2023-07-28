@@ -19,7 +19,7 @@ function Table() {
   };
   useEffect(() => {
     getUser();
-  }, []);
+  }, [active]);
 
   function handleEdit(id) {
     setActive(!active);
@@ -46,14 +46,16 @@ function Table() {
                     <td>{el.name}</td>
                     <td>{el.email}</td>
                     <td>{el.phone_no}</td>
-                    <button
-                      className="button-4"
-                      onClick={() => {
-                        handleEdit(el);
-                      }}
-                    >
-                      Edit
-                    </button>
+                    <td>
+                      <button
+                        className="button-4 w9"
+                        onClick={() => {
+                          handleEdit(el);
+                        }}
+                      >
+                        Edit
+                      </button>
+                    </td>
                   </tr>
                 );
               })

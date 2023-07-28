@@ -7,6 +7,7 @@ import Formsecond from "./Formsecond.jsx";
 function Tablesecond() {
   const [active, setActive] = useState(false);
   const [ID, setID] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const data = useSelector((storedata) => {
     return storedata.data;
@@ -18,7 +19,9 @@ function Tablesecond() {
   }
 
   useEffect(() => {
+    setLoading(true);
     getdata();
+    setLoading(false);
   }, [active]);
 
   return (
@@ -36,25 +39,29 @@ function Tablesecond() {
           </tr>
         </thead>
         <tbody>
-          {data.data?.map((el, i) => {
-            return (
-              <tr key={i}>
-                <td>{el?.id}</td>
-                <td>{el?.name}</td>
-                <td>{el?.email}</td>
-                <td>{el?.phone}</td>
-                <td>{el?.company_name}</td>
-                <button
-                  className="button-4"
-                  onClick={() => {
-                    handleEdit(el?.id);
-                  }}
-                >
-                  Edit
-                </button>
-              </tr>
-            );
-          })}
+          {!loading
+            ? data.data?.map((el, i) => {
+                return (
+                  <tr key={i}>
+                    <td>{el?.id}</td>
+                    <td>{el?.name}</td>
+                    <td>{el?.email}</td>
+                    <td>{el?.phone}</td>
+                    <td>{el?.company_name}</td>
+                    <td>
+                      <button
+                        className="button-4 w9"
+                        onClick={() => {
+                          handleEdit(el?.id);
+                        }}
+                      >
+                        Edit
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })
+            : "loading..."}
         </tbody>
       </table>
     </>
