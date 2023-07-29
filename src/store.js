@@ -1,6 +1,6 @@
-import { legacy_createStore } from "redux";
+import { applyMiddleware, legacy_createStore } from "redux";
 import reducerdata from "./reducer";
-
-const Store = legacy_createStore(reducerdata);
+import thunk from "redux-thunk";
+const Store = legacy_createStore(reducerdata, applyMiddleware(thunk));
 
 export default Store;
